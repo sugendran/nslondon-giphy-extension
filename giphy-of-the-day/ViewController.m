@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "giphy.h"
 
 @interface ViewController ()
             
@@ -17,7 +18,17 @@
             
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"viewdidload");
     // Do any additional setup after loading the view, typically from a nib.
+    [Giphy currentGif:^(UIImage *result, NSNumber *width, NSNumber *height) {
+        NSLog(@"Got something!");
+        if (result == nil)
+        {
+            return;
+        }
+        NSLog(@"setting image");
+        [self.imgView setImage:result];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
